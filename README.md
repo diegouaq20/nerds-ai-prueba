@@ -44,3 +44,7 @@ Aplica tres transformaciones al texto: capitalización alternada, reemplazo de v
   "unique_words": ["world", "This", "is", "a", "test", "again"]
 }
 ```
+## Documentación
+
+La API cuenta con documentación interactiva generada con Swagger.  
+Una vez iniciado el servidor, visita `http://localhost:3000/docs` para explorar y probar los endpoints desde el navegador.
