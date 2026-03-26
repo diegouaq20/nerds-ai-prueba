@@ -10,7 +10,9 @@ API desplegada en Railway — no requiere instalación para probarla:
 
 Desde ahí puedes probar ambos endpoints directamente en el navegador con el botón **"Try it out"**.
 
-![Vista general de Swagger y cómo probar](../nerds-ai-prueba/assets/swagger.gif)
+![swagger](https://github.com/user-attachments/assets/45d0761d-339a-482e-ae59-ad5d9b53a974)
+
+
 
 ## Requisitos previos
 - Node.js v18+
