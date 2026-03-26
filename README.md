@@ -2,6 +2,16 @@
 
 API REST con Node.js y Express para procesar y manipular cadenas de texto.
 
+## Demo
+
+API desplegada en Railway — no requiere instalación para probarla:
+
+🔗 **Swagger UI:** https://nerds-ai-prueba-production.up.railway.app/docs
+
+Desde ahí puedes probar ambos endpoints directamente en el navegador con el botón **"Try it out"**.
+
+![Vista general de Swagger y cómo probar](../nerds-ai-prueba/assets/swagger.gif)
+
 ## Requisitos previos
 - Node.js v18+
 - npm
