@@ -1,9 +1,9 @@
-// Función auxiliar: invierte una cadena
+// 1. Invierte string
 function reverseString(str) {
   return str.split('').reverse().join('');
 }
 
-// Función auxiliar: procesa el paréntesis más interno
+// 2. Procesa paréntesis más interno
 function reverseInnermostParentheses(text) {
   const closeIndex = text.indexOf(')');
 
@@ -23,12 +23,63 @@ function reverseInnermostParentheses(text) {
   );
 }
 
+// 3. Capitalización alternada
+function alternatingCaps(text) {
+  let charIndex = 0; // renombramos para claridad
+  return text.split('').map(char => {
+    if (!/[a-zA-Z]/.test(char)) {
+      charIndex++; // ahora los espacios y símbolos SÍ suman al índice
+      return char;
+    }
+    const result = charIndex % 2 === 0 ? char.toUpperCase() : char.toLowerCase();
+    charIndex++;
+    return result;
+  }).join('');
+}
+
+// 4. Reemplazo de vocales
+function replaceVowels(text) {
+  const vowelMap = {
+    a: 'e',
+    e: 'i',
+    i: 'o',
+    o: 'u',
+    u: 'a',
+    A: 'E',
+    E: 'I',
+    I: 'O',
+    O: 'U',
+    U: 'A',
+  };
+
+  return text
+    .split('')
+    .map((char) => vowelMap[char] || char)
+    .join('');
+}
+
+// 5. Palabras unicas (case insensitive)
+function getUniqueWords(text) {
+  const words = text.match(/[a-zA-Z]+/g) || [];
+  const frequency = {};
+
+  words.forEach((word) => {
+    const normalized = word.toLowerCase();
+    frequency[normalized] = (frequency[normalized] || 0) + 1;
+  });
+
+  return words.filter((word) => frequency[word.toLowerCase()] === 1);
+}
+
+// Controller
+
 const textController = {
+  // /text/process
   process: (req, res) => {
     try {
       const { text } = req.body;
 
-      // ✅ Validación
+      // Validación
       if (!text || typeof text !== 'string') {
         return res.status(400).json({
           error: 'El campo "text" es requerido y debe ser un string',
@@ -38,11 +89,10 @@ const textController = {
       const steps = [text];
       let current = text;
 
-      // ✅ Loop seguro
       while (current.includes('(')) {
         const next = reverseInnermostParentheses(current);
 
-        if (!next) break; // evita errores si algo falla
+        if (!next) break;
 
         current = next;
         steps.push(current);
@@ -60,6 +110,7 @@ const textController = {
     }
   },
 
+  //  /text/transform
   transform: (req, res) => {
     try {
       const { text } = req.body;
@@ -71,7 +122,9 @@ const textController = {
       }
 
       return res.status(200).json({
-        result: text,
+        alternating_caps: alternatingCaps(text),
+        vowel_replacement: replaceVowels(text),
+        unique_words: getUniqueWords(text),
       });
     } catch (error) {
       console.error('Error en transform:', error);
