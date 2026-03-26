@@ -10,6 +10,10 @@ app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/text', textRoutes);
 
+app.get('/', (req, res) => {
+  res.redirect('/docs');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Docs available at http://localhost:${PORT}/docs`);
