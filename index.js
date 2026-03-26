@@ -4,7 +4,7 @@ const swaggerSpec = require('./src/swagger');
 const textRoutes = require('./src/routes/text.routes');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
