@@ -1,2 +1,46 @@
-# nerds-ai-prueba
-API básica con node js para procesamiento de texto
+# Text Processing API
+
+API REST con Node.js y Express para procesar y manipular cadenas de texto.
+
+## Requisitos previos
+- Node.js v18+
+- npm
+
+## Instalación y uso
+```bash
+git clone https://github.com/diegouaq20/nerds-ai-prueba.git
+cd nerds-ai-prueba
+npm install
+node index.js
+```
+
+Servidor disponible en `http://localhost:3000`
+
+## Endpoints
+
+### `POST /text/process`
+Invierte el contenido de paréntesis de adentro hacia afuera, devolviendo cada paso.
+```json
+// Request
+{ "text": "(Hola (Mundo))" }
+
+// Response
+{ "result": ["(Hola (Mundo))", "(Hola odnuM)", "Mundo aloH"] }
+```
+
+### `POST /text/transform`
+Aplica tres transformaciones al texto: capitalización alternada, reemplazo de vocales y detección de palabras únicas.
+
+> **Nota sobre reemplazo de vocales:** Se implementa estrictamente la regla `a→e, e→i, i→o, o→u, u→a`.
+> El ejemplo del enunciado original presenta inconsistencias respecto a esta regla.
+```json
+// Request
+{ "text": "Hello world! This is a test. Hello again." }
+
+// Response
+{
+  "alternating_caps": "HeLlO WoRlD! tHiS Is a tEsT. hElLo aGaIn.",
+  "vowel_replacement": "Hillu wurld! Thos os e tist. Hillu egeon.",
+  "unique_words": ["world", "This", "is", "a", "test", "again"]
+}
+```
