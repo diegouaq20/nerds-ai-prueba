@@ -25,16 +25,27 @@ function reverseInnermostParentheses(text) {
 
 // 3. Capitalización alternada
 function alternatingCaps(text) {
-  let charIndex = 0; // renombramos para claridad
-  return text.split('').map(char => {
-    if (!/[a-zA-Z]/.test(char)) {
-      charIndex++; // ahora los espacios y símbolos SÍ suman al índice
-      return char;
-    }
-    const result = charIndex % 2 === 0 ? char.toUpperCase() : char.toLowerCase();
-    charIndex++;
-    return result;
-  }).join('');
+    console.log('ENTRO A alternatingCaps NUEVA');
+  let letterIndex = 0;
+
+  return text
+    .split('')
+    .map((char) => {
+      if (!/[a-zA-Z]/.test(char)) {
+        // reinicia al encontrar separadores
+        if (char === ' ' || /[^\w]/.test(char)) {
+          letterIndex = 0;
+        }
+        return char;
+      }
+
+      const result =
+        letterIndex % 2 === 0 ? char.toUpperCase() : char.toLowerCase();
+
+      letterIndex++;
+      return result;
+    })
+    .join('');
 }
 
 // 4. Reemplazo de vocales
